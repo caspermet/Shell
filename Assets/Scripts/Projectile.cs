@@ -6,6 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public LayerMask CollisionMask;
+    public Color trailColour;
     float speed = 10;
     float damage = 1;
 
@@ -22,6 +23,8 @@ public class Projectile : MonoBehaviour
         {
             OnHitObject(initialCollisions[0], transform.position);
         }
+
+        GetComponent<TrailRenderer>().startColor = trailColour;
     }
 
     public void SetSpeed(float newSpeed)
