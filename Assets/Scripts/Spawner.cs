@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour
 
     bool isDisabled;
 
+    public event System.Action<int> OnNewWave;
+
     void Start()
     {
         playerEntity = FindObjectOfType<Player>();
@@ -110,14 +112,25 @@ public class Spawner : MonoBehaviour
     void NextWave()
     {
         currentWaveNumber++;
-        print("Wave: " + currentWaveNumber);
         if (currentWaveNumber - 1 < waves.Length)
         {
             currentWave = waves[currentWaveNumber - 1];
 
             enemiesRemainingToSpawn = currentWave.enemyCount;
             enemiesRemainingAlive = currentWave.enemyCount;
+
+            if(OnNewWave != null)
+            {
+                OnNewWave(currentWaveNumber);
+            }
+
+            ResetPlayerPosition();
         }
+    }
+
+    void ResetPlayerPosition()
+    {
+        playerT.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
     }
 
     [System.Serializable]
