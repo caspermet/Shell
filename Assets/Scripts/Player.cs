@@ -11,6 +11,8 @@ public class Player : LivingEntity
     Camera viewCamera;
     GunController gunController;
 
+    public Crosshairs crosshairs;
+
     protected override void Start()
     {
         base.Start();
@@ -38,13 +40,15 @@ public class Player : LivingEntity
     void LookSystem()
     {
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
         float rayDistance;
 
         if (groundPlane.Raycast(ray, out rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
             controller.LookAt(point);
+            crosshairs.transform.position = point;
+            crosshairs.DetectTartgets(ray);
         }
     }
 

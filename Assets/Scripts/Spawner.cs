@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
             spawnTile = map.GetTileFromPosition(playerT.position);
         }
         Material tileMat = spawnTile.GetComponent<Renderer>().material;
-        Color initialColour = tileMat.color;
+        Color initialColour = Color.white;
         Color flashColour = Color.red;
         float spawnTime = 0;
 
@@ -87,8 +87,6 @@ public class Spawner : MonoBehaviour
             spawnTime += Time.deltaTime;
             yield return null;
         }
-        print("Enemy spanw on coord: " + (spawnTile.position + Vector3.up));
-        print("Coord of tile: " + (spawnTile.position));
 
         Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
         spawnedEnemy.OnDeath += OnEnemyDeath;
