@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   moveSpeed: 5
-  crosshairs: {fileID: 6862955214401993963, guid: 63123e2b9f204944a83b0221b8f85ec1, type: 3}
+  crosshairs: {fileID: 0}
 --- !u!114 &1711430319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080036132225443149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.601, y: 0, z: 0.457}
+  m_LocalPosition: {x: 0.278, y: 0, z: 0.411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3763273036477278802}

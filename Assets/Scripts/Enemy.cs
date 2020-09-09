@@ -57,7 +57,7 @@ public class Enemy : LivingEntity
     [System.Obsolete]
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
-        if(damage >= health)
+        if (damage >= health)
         {
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.startLifetime);
 
@@ -108,11 +108,11 @@ public class Enemy : LivingEntity
                 hasAppliedDamage = true;
                 targetEntity.TakeDamage(damage);
             }
-                percent += Time.deltaTime * attackSpeed;
-                float interpolation = (-percent * percent + percent) * 4;
-                transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
+            percent += Time.deltaTime * attackSpeed;
+            float interpolation = (-percent * percent + percent) * 4;
+            transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
 
-                yield return null;
+            yield return null;
         }
 
         skinMaterial.color = originalColour;
