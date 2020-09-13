@@ -95,7 +95,7 @@ public class Gun : MonoBehaviour
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
 
-            AudioManager.instance.PlaySound(shootAudio, transform.position);
+            AudioManager.instance.PlaySound(shootAudio, projectileSpawn[0].position);
         }
     }
 

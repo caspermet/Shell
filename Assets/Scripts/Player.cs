@@ -11,8 +11,6 @@ public class Player : LivingEntity
     Camera viewCamera;
     GunController gunController;
 
-    public Crosshairs crosshairs;
-
     protected override void Start()
     {
         base.Start();
@@ -47,8 +45,7 @@ public class Player : LivingEntity
         {
             Vector3 point = ray.GetPoint(rayDistance);
             controller.LookAt(point);
-            crosshairs.transform.position = point;
-            crosshairs.DetectTartgets(ray);
+
             
             if((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 3){
                 gunController.Aim(point);
