@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
+
         volumeSLiders[0].value = AudioManager.instance.masterVolumePercent;
         volumeSLiders[1].value = AudioManager.instance.musicVolumePercent;
         volumeSLiders[2].value = AudioManager.instance.sfxVolumePercent;
@@ -30,7 +31,7 @@ public class Menu : MonoBehaviour
             resolutionToggles[i].isOn = i == activeScreenResIndex;
         }
 
-        SetFullscreen(isFullscreen);
+        fullScreenToggle.isOn = fullScreenToggle;
     }
 
     public void Play()
