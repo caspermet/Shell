@@ -13083,6 +13083,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880800156}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &889466101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4776610418618619223, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
+  m_PrefabInstance: {fileID: 2584713254735292837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &889466109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889466101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0c651c1dd70634d8eb21bccd99b892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &903169454
 GameObject:
   m_ObjectHideFlags: 0
@@ -32091,6 +32108,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045065007}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &2051190567 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1283736897328342177, guid: de174ed06501d3d4ca48346117d21091, type: 3}
+  m_PrefabInstance: {fileID: 1283736897551447555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2066970087
 GameObject:
   m_ObjectHideFlags: 0
@@ -33697,6 +33719,14 @@ PrefabInstance:
       propertyPath: startingGun
       value: 
       objectReference: {fileID: 6906675959466624151, guid: 3342dc4e1204fbe4c9617de245374572, type: 3}
+    - target: {fileID: 4776610417550332101, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776610418618619220, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
+      propertyPath: audioListener
+      value: 
+      objectReference: {fileID: 2051190567}
     - target: {fileID: 4776610418618619221, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -33745,15 +33775,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Person Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4776610419634566595, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.57
-      objectReference: {fileID: 0}
     - target: {fileID: 8109843628844754488, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
       propertyPath: startingHealth
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8109843628844754488, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
+      propertyPath: mouseSensitivity
+      value: 600
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4776610419634566605, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2d3f269ee6403848af1e3e5d1b278c4, type: 3}
 --- !u!4 &2584713254735292838 stripped
 Transform:

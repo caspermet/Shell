@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
+[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerLook))]
 public class Player : LivingEntity
 {
+    public float mouseSensitivity;
     public float moveSpeed = 5;
-    PlayerController controller;
+    PlayerMovement playerMovement;
+    PlayerLook playerLook;
     Camera viewCamera;
     GunController gunController;
 
@@ -15,9 +18,10 @@ public class Player : LivingEntity
     {
         base.Start();
 
-        controller = GetComponent<PlayerController>();
         gunController = GetComponent<GunController>();
-        viewCamera = Camera.main;     
+        playerMovement = GetComponent<PlayerMovement>();
+        playerLook = GetComponent<PlayerLook>();
+        viewCamera = Camera.main;
     }
 
 
@@ -32,25 +36,16 @@ public class Player : LivingEntity
     {
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 moveVelocity = moveInput.normalized * moveSpeed;
-        controller.Move(moveVelocity);
     }
 
     void LookSystem()
     {
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 point = ray.GetPoint(rayDistance);
-            controller.LookAt(point);
-
-            
-            if((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 3){
-                gunController.Aim(point);
-            }
-        }
+        Vector2 look;
+        look.x = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        look.y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        print(look);
+        playerLook.SetPlayerLook(look);
+        gunController.Aim(look);
     }
 
     void WeaponSystem()

@@ -37,6 +37,7 @@ public class Gun : MonoBehaviour
     Vector3 recoilSmoothDampVelocity;
     float recoilRotSmoothDampVelocity;
     float recoilAngle;
+    float xRotation = 0f;
 
     private void Start()
     {
@@ -132,10 +133,15 @@ public class Gun : MonoBehaviour
         projectilesRemainingInMag = projectilesPerMag;
     }
 
-    public void Aim(Vector3 aimPoint)
+    public void Aim(Vector2 aimPoint)
     {
         if(!isReloading)
-            transform.LookAt(aimPoint);
+        {
+            xRotation -= aimPoint.y;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        }           
     }
 
     public void OnTriggerHold()

@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 velocity;
     Rigidbody myRigidbody;
-    public Transform audioListener;
 
     void Start()
     {

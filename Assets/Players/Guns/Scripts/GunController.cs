@@ -52,7 +52,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    public void Aim(Vector3 aimPoint)
+    public void Aim(Vector2 aimPoint)
     {
         if(equippedGun != null)
         {
