@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class LivingEntity : MonoBehaviour, IDamageable
+public class LivingEntity : NetworkBehaviour, IDamageable
 {
     public float startingHealth;
     protected float health;

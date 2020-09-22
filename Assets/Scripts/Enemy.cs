@@ -134,9 +134,10 @@ public class Enemy : LivingEntity
             {
                 Vector3 dirToTarget = (target.position - transform.position).normalized;
                 Vector3 targetPosition = target.position - dirToTarget * (myCollisionRadius + targetCollisionRadius + attackDIstanceThreshold / 2);
+                targetPosition.y = 0;
                 if (!dead)
                 {
-                    pathFinder.SetDestination(targetPosition);
+                 //   pathFinder.SetDestination(targetPosition);
                 }
             }
 

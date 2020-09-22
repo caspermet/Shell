@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4776610417550332153}
   - component: {fileID: 4776610417550332154}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,9 +157,13 @@ GameObject:
   - component: {fileID: 8076265015532019729}
   - component: {fileID: 3032458026428391964}
   - component: {fileID: 8109843628844754488}
+  - component: {fileID: 889466102}
+  - component: {fileID: 889466109}
+  - component: {fileID: -5097950013561554290}
+  - component: {fileID: -584739654943359763}
   m_Layer: 0
   m_Name: First Person Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,6 +219,7 @@ MonoBehaviour:
   gravity: -19.62
   jumpHeight: 2
   groundCheck: {fileID: 4776610417878689952}
+  audioListener: {fileID: 0}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
@@ -233,7 +238,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 96
   m_CollisionDetection: 0
 --- !u!114 &8076265015532019729
 MonoBehaviour:
@@ -259,8 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e612edea08f5042b7a93069d5fdd16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHold: {fileID: 0}
-  startingGun: {fileID: 0}
+  weaponHold: {fileID: 6713321231344377836}
+  startingGun: {fileID: 6906675959466624151, guid: 3342dc4e1204fbe4c9617de245374572, type: 3}
 --- !u!114 &8109843628844754488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,9 +278,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b28292cf1f55140bf752e0bc6d0e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 0
+  syncMode: 0
+  syncInterval: 0.1
+  startingHealth: 10
+  mouseSensitivity: 600
   moveSpeed: 5
-  crosshairs: {fileID: 0}
+  viewCamera: {fileID: 4776610419634566604}
+--- !u!136 &889466102
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776610418618619223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &889466109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776610418618619223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0c651c1dd70634d8eb21bccd99b892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewCamera: {fileID: 4776610419634566604}
+--- !u!114 &-5097950013561554290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776610418618619223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &-584739654943359763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776610418618619223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
 --- !u!1 &4776610419634566606
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,11 +355,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4776610419634566595}
   - component: {fileID: 4776610419634566604}
-  - component: {fileID: 4776610419634566605}
   - component: {fileID: 4776610419634566594}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: PlayerCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,14 +420,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4776610419634566605
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4776610419634566606}
-  m_Enabled: 1
 --- !u!114 &4776610419634566594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,5 +432,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0c651c1dd70634d8eb21bccd99b892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 500
-  playerBody: {fileID: 4776610418618619221}
+  viewCamera: {fileID: 0}

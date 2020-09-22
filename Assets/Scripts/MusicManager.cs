@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            AudioManager.instance.PlayMusic(mainTheme, 2);
+            //AudioManager.instance.PlayMusic(mainTheme, 2);
         }
     }
 }

@@ -380,12 +380,14 @@ MonoBehaviour:
   bursCount: 5
   projectilesPerMag: 30
   reloadTime: 1
+  range: 100
   kickMinMax: {x: 0.05, y: 0.2}
   recoilAngleMinMax: {x: 3, y: 5}
   recoilMoveSettleTime: 0.1
   recoilRotationSettleTime: 0.1
   shell: {fileID: 2702285333497105303, guid: ea6215d2a14893e4192e9605a9482227, type: 3}
   shellEjection: {fileID: 7777921245966366594}
+  impactEffect: {fileID: 400002, guid: 33ea082818685614c89debb51b70c162, type: 3}
   shootAudio: {fileID: 8300000, guid: 827ee2921a33a854788128119024b0f4, type: 3}
   reloadAudio: {fileID: 8300000, guid: 96d129d8e8bb5fa46aa5ae2bd7646bc0, type: 3}
 --- !u!114 &5067313401579683357

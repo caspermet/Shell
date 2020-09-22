@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ public class Player : LivingEntity
 {
     public float mouseSensitivity;
     public float moveSpeed = 5;
+    public Camera viewCamera;
     PlayerMovement playerMovement;
-    PlayerLook playerLook;
-    Camera viewCamera;
+    PlayerLook playerLook;    
     GunController gunController;
 
     protected override void Start()
@@ -21,12 +22,16 @@ public class Player : LivingEntity
         gunController = GetComponent<GunController>();
         playerMovement = GetComponent<PlayerMovement>();
         playerLook = GetComponent<PlayerLook>();
-        viewCamera = Camera.main;
     }
 
 
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         MoveSystem();
         LookSystem();
         WeaponSystem();
@@ -43,7 +48,7 @@ public class Player : LivingEntity
         Vector2 look;
         look.x = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         look.y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        print(look);
+
         playerLook.SetPlayerLook(look);
         gunController.Aim(look);
     }
@@ -70,5 +75,10 @@ public class Player : LivingEntity
     {
         AudioManager.instance.PlaySound("Player Death", transform.position);
         base.Die();
+    }
+
+    internal Camera GetCameraComponent()
+    {
+        return viewCamera;
     }
 }
