@@ -258,18 +258,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>Assets\Photon\PhotonLibs\Photon3Unity3D.dll</HintPath>
     </Reference>
@@ -666,77 +654,9 @@
       <Project>{AF773E5B-B81A-BBA7-ED5C-F05705A16945}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.Weaver.csproj">
-      <Project>{CC025A4B-9700-41E8-5CD8-6215C4A67CC2}</Project>
-      <Name>Mirror.Weaver</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Authenticators.csproj">
-      <Project>{9A52967A-7E9D-B1C7-9280-1F3421655BCB}</Project>
-      <Name>Mirror.Authenticators</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Components.csproj">
-      <Project>{C72DC507-DC53-BA46-E003-EBA8B7F60B4C}</Project>
-      <Name>Mirror.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Websocket.csproj">
-      <Project>{7AA1D479-0972-F304-CDC0-6E720059FC55}</Project>
-      <Name>Mirror.Websocket</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Examples.csproj">
-      <Project>{2F64AEA4-B88C-748D-4B55-2F3275ED3F62}</Project>
-      <Name>Mirror.Examples</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.CompilerSymbols.csproj">
-      <Project>{05CFC86F-5F36-6A0A-6927-4E6FD2978736}</Project>
-      <Name>Mirror.CompilerSymbols</Name>
-    </ProjectReference>
-    <ProjectReference Include="Ninja.WebSockets.csproj">
-      <Project>{704EF5A6-1902-B20D-9D13-99E5106291AA}</Project>
-      <Name>Ninja.WebSockets</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Cloud.csproj">
-      <Project>{112787FC-0D28-3A58-0435-32A22157B6E0}</Project>
-      <Name>Mirror.Cloud</Name>
-    </ProjectReference>
-    <ProjectReference Include="Telepathy.csproj">
-      <Project>{26724D42-8F5C-86EC-EE48-D6BBE79AC424}</Project>
-      <Name>Telepathy</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Examples.Cloud.Pong.csproj">
-      <Project>{6C7F19A2-B8A8-D3F3-215A-83DB434051FD}</Project>
-      <Name>Mirror.Examples.Cloud.Pong</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.csproj">
-      <Project>{27BDAC6D-DBEE-C117-5A9B-77177C68C610}</Project>
-      <Name>Mirror</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.example.RigidbodyPhysics.csproj">
-      <Project>{5570D607-0745-6074-ADA6-024478A0C867}</Project>
-      <Name>Mirror.example.RigidbodyPhysics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{8AAC8506-3643-E577-DFB1-14B2D76A3F45}</Project>
-      <Name>Mirror.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Examples.Cloud.GUI.csproj">
-      <Project>{78291CA4-A898-CCCC-242D-A9667E1EBC69}</Project>
-      <Name>Mirror.Examples.Cloud.GUI</Name>
-    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
       <Project>{17C42634-2D8B-8C48-1DC6-92E16B682FC2}</Project>
       <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
-      <Project>{8A45D9AE-789B-123B-A70B-0B8A0BBCDD55}</Project>
-      <Name>PunDemos.DemoHubEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
-      <Project>{6A6D48EA-DB51-D8F2-0768-CEDEA387B151}</Project>
-      <Name>PunDemos.DemoSlotcarEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
-      <Project>{CB1DF609-DB57-6797-51EC-575DBE1F4CBD}</Project>
-      <Name>PhotonUnityNetworking.Demos</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
       <Project>{047C450A-EACF-EE34-BA9B-6BE3F486B945}</Project>

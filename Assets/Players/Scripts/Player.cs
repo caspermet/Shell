@@ -27,11 +27,6 @@ public class Player : LivingEntity
 
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
         MoveSystem();
         LookSystem();
         WeaponSystem();
