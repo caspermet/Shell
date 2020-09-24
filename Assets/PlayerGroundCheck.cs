@@ -18,7 +18,7 @@ public class PlayerGroundCheck : MonoBehaviour
             return;
         }
 
-        playerController.SetGroundedState(true);
+      //  playerController.SetGroundedState(true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -28,7 +28,7 @@ public class PlayerGroundCheck : MonoBehaviour
             return;
         }
 
-        playerController.SetGroundedState(false);
+     //   playerController.SetGroundedState(false);
     }
 
     private void OnTriggerStay(Collider other)
@@ -38,6 +38,36 @@ public class PlayerGroundCheck : MonoBehaviour
             return;
         }
 
-        playerController.SetGroundedState(true);
+       // playerController.SetGroundedState(true);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject == playerController.gameObject)
+        {
+            return;
+        }
+
+       // playerController.SetGroundedState(true);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject == playerController.gameObject)
+        {
+            return;
+        }
+
+       // playerController.SetGroundedState(false);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject == playerController.gameObject)
+        {
+            return;
+        }
+
+       // playerController.SetGroundedState(true);
     }
 }
