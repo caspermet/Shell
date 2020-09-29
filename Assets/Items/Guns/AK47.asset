@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c85c69edcc9b4647a670796be51cf99, type: 3}
+  m_Name: AK47
+  m_EditorClassIdentifier: 
+  itemName: AK47
+  itemType: 0
+  fireMode: 0
+  canPlayerChangeFireMode: 1
+  msBetweenShots: 1000
+  muzzleVelocity: 35
+  bursCount: 5
+  projectilesPerMag: 20
+  reloadTime: 1.2
+  range: 500
+  damage: 1
+  shootAudio: {fileID: 8300000, guid: 7a3a19c2fc27d5c48990fd60ca7cd2db, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 7a05fe39749a757438482af71e097d89, type: 3}

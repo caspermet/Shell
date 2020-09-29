@@ -45,14 +45,13 @@ public class Player : LivingEntity
         look.y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         playerLook.SetPlayerLook(look);
-        gunController.Aim(look);
     }
 
     void WeaponSystem()
     {
         if (Input.GetMouseButton(0))
         {
-            gunController.OnTriggerHold();
+            //gunController.OnTriggerHold();
         }
 
         if (Input.GetMouseButtonUp(0))

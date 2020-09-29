@@ -7,7 +7,11 @@ public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
     public Gun startingGun;
+    public Item[] items;
     Gun equippedGun;
+
+    int itemIndex;
+    int previousItemIndex = -1;
 
     private void Start()
     {
@@ -28,11 +32,25 @@ public class GunController : MonoBehaviour
         equippedGun.transform.parent = weaponHold;
     }
 
-    public void OnTriggerHold()
+    public void EquipItem(int _index)
+    {
+        itemIndex = _index;
+
+        items[itemIndex].itemGameObject.SetActive(true);
+
+        if (previousItemIndex != -1)
+        {
+            items[previousItemIndex].itemGameObject.SetActive(false);
+        }
+
+        previousItemIndex = itemIndex;
+    }
+
+    public void OnTriggerHold(Transform view)
     {
         if (equippedGun != null)
         {
-            equippedGun.OnTriggerHold();
+            equippedGun.OnTriggerHold(view);
         }
     }
 

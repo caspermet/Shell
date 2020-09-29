@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public enum FireMode { Auto, Burst, Single };
-    public FireMode fireMode;
-
+    public GunInfo gunInfo;
     public Transform[] projectileSpawn;
-    public Projectile projectile;
-    public float msBetweenShots = 100;
-    public float muzzleVelocity = 35;
-    public int bursCount;
-    public int projectilesPerMag;
-    public float reloadTime = 0.3f;
-    public float range = 100;
-   
+
     [Header("Recoil")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
     public Vector2 recoilAngleMinMax = new Vector2(3, 5);
@@ -26,8 +17,6 @@ public class Gun : MonoBehaviour
     public Transform shell;
     public Transform shellEjection;
     public Transform impactEffect;
-    public AudioClip shootAudio;
-    public AudioClip reloadAudio;
     MuzzleFlash muzzleFlash;
     float nextShotTime;
 
@@ -35,7 +24,6 @@ public class Gun : MonoBehaviour
     int shotRemainingInBurst;
     int projectilesRemainingInMag;
     bool isReloading;
-    Camera viewCamera;
 
     Vector3 recoilSmoothDampVelocity;
     float recoilRotSmoothDampVelocity;
@@ -46,13 +34,13 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         muzzleFlash = GetComponent<MuzzleFlash>();
-        shotRemainingInBurst = bursCount;
-        projectilesRemainingInMag = projectilesPerMag;
-        viewCamera = GetComponentInParent<Player>().GetCameraComponent();
+        shotRemainingInBurst = gunInfo.bursCount;
+        projectilesRemainingInMag = gunInfo.projectilesPerMag;       
     }
 
     private void LateUpdate()
     {
+        
         //anime recoil
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
         recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
@@ -64,11 +52,11 @@ public class Gun : MonoBehaviour
         }
     }
 
-    void Shoot()
+    void Shoot(Transform view)
     {     
         if (!isReloading && Time.time > nextShotTime && projectilesRemainingInMag > 0)
         {
-            if (fireMode == FireMode.Burst)
+            if (gunInfo.fireMode == FireMode.Burst)
             {
                 if (shotRemainingInBurst == 0)
                 {
@@ -76,7 +64,7 @@ public class Gun : MonoBehaviour
                 }
                 shotRemainingInBurst--;
             }
-            else if (fireMode == FireMode.Single)
+            else if (gunInfo.fireMode == FireMode.Single)
             {
                 if (!triggerReleaseSinceLastShot)
                 {
@@ -90,10 +78,10 @@ public class Gun : MonoBehaviour
                     break;
                 }
                 projectilesRemainingInMag--;
-                nextShotTime = Time.time + msBetweenShots / 1000;
+                nextShotTime = Time.time + gunInfo.msBetweenShots / 1000;
 
                 RaycastHit hit;
-                if(Physics.Raycast(viewCamera.transform.position, viewCamera.transform.forward, out hit, range))
+                if(Physics.Raycast(view.position, view.forward, out hit, gunInfo.range))
                 {
                     OnHitObject(hit.collider, hit.point, hit.normal);
                 }
@@ -105,20 +93,20 @@ public class Gun : MonoBehaviour
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
             if (AudioManager.instance != null)
             {
-                AudioManager.instance.PlaySound(shootAudio, projectileSpawn[0].position);
+                AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
             }
         }
     }
 
     public void Reload()
     {
-        if (!isReloading && projectilesRemainingInMag != projectilesPerMag)
+        if (!isReloading && projectilesRemainingInMag != gunInfo.projectilesPerMag)
         {
             StartCoroutine(AnimateReload());
 
             if (AudioManager.instance != null)
             {
-                AudioManager.instance.PlaySound(reloadAudio, transform.position);
+                AudioManager.instance.PlaySound(gunInfo.reloadAudio, transform.position);
             }
         }
     }
@@ -128,7 +116,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
         yield return new WaitForSeconds(0.2f);
 
-        float reloadSpeed = 1 / reloadTime;
+        float reloadSpeed = 1 / gunInfo.reloadTime;
         float percent = 0;
         Vector3 initialRot = transform.localEulerAngles;
         float maxReloadAngle = 30;
@@ -144,7 +132,7 @@ public class Gun : MonoBehaviour
         }
 
         isReloading = false;
-        projectilesRemainingInMag = projectilesPerMag;
+        projectilesRemainingInMag = gunInfo.projectilesPerMag;
     }
 
     public void Aim(Vector2 aimPoint)
@@ -158,16 +146,16 @@ public class Gun : MonoBehaviour
         }           
     }
 
-    public void OnTriggerHold()
+    public void OnTriggerHold(Transform view)
     {
-        Shoot();
+        Shoot(view);
         triggerReleaseSinceLastShot = false;
     }
 
     public void OnTriggerRelease()
     {
         triggerReleaseSinceLastShot = true;
-        shotRemainingInBurst = bursCount;
+        shotRemainingInBurst = gunInfo.bursCount;
     }
 
     void OnHitObject(Collider c, Vector3 hitPoint, Vector3 normal)
