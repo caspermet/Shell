@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b775bfe69002acc4b94e24866e23d99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iteminfo: {fileID: 11400000, guid: 06cc8ed1ff76ba649904f77af0bced49, type: 2}
+  itemInfo: {fileID: 0}
   itemGameObject: {fileID: 0}
+  itemType: 0
   gunInfo: {fileID: 11400000, guid: 06cc8ed1ff76ba649904f77af0bced49, type: 2}
   projectileSpawn: []
   kickMinMax: {x: 0.05, y: 0.2}
@@ -515,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4119676204328424325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.342, z: -0.263}
+  m_LocalPosition: {x: 0.118, y: 0.404, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 950883219413196077}

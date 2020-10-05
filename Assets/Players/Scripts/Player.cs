@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(GunController))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerLook))]
 public class Player : LivingEntity
@@ -13,13 +12,10 @@ public class Player : LivingEntity
     public Camera viewCamera;
     PlayerMovement playerMovement;
     PlayerLook playerLook;    
-    GunController gunController;
 
     protected override void Start()
     {
         base.Start();
-
-        gunController = GetComponent<GunController>();
         playerMovement = GetComponent<PlayerMovement>();
         playerLook = GetComponent<PlayerLook>();
     }
@@ -56,12 +52,12 @@ public class Player : LivingEntity
 
         if (Input.GetMouseButtonUp(0))
         {
-            gunController.OnTriggerRelease();
+          //  gunController.OnTriggerRelease();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gunController.Reload();
+           // gunController.Reload();
         }
     }
 

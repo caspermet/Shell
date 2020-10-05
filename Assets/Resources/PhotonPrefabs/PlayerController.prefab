@@ -320,7 +320,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &8301435642534525312
 MonoBehaviour:
@@ -381,6 +381,7 @@ MonoBehaviour:
   items:
   - {fileID: 0}
   - {fileID: 0}
+  audioListener: {fileID: 0}
   groundCheck: {fileID: 2775846413374531714}
   groundDistance: 0.4
   groundMask:
@@ -399,7 +400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemHolder: {fileID: 4674914836534595684}
-  startingItem: {fileID: 0}
   items:
   - {fileID: 8385125529975452197}
 --- !u!1 &7510210692860542575
@@ -489,6 +489,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4287554192279561429, guid: 63c164924acebe2448cd7aad5a0f972f, type: 3}
+      propertyPath: projectileSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287554192279561429, guid: 63c164924acebe2448cd7aad5a0f972f, type: 3}
+      propertyPath: projectileSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 65515066225679797}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63c164924acebe2448cd7aad5a0f972f, type: 3}
 --- !u!4 &4823275675520682973 stripped
@@ -507,3 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b775bfe69002acc4b94e24866e23d99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &65515066225679797 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5707540082133617477, guid: 63c164924acebe2448cd7aad5a0f972f, type: 3}
+  m_PrefabInstance: {fileID: 5754897650104243952}
+  m_PrefabAsset: {fileID: 0}

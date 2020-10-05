@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
+    public  int Team1 = 0;
+    public  int Team2 = 0;
+
+    List<GameObject> players;
 
     private void Awake()
     {
@@ -18,6 +22,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        players = new List<GameObject>();
     }
 
     private void OnEnable()
@@ -36,17 +41,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if(scene.buildIndex == 1)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            players.Add(PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity));
         }
     }
 
-    void Start()
+    internal void AddPlayerToTeam2()
     {
-        
+        print("team 1 " + Team1);
     }
-
-    void Update()
+    internal void AddPlayerToTeam1()
     {
-        
+        print("team 2 " + Team2);
     }
 }

@@ -43,7 +43,7 @@ public class GunItem : Item
     {
         //anime recoil
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
-        //recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
+        recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
         //transform.localEulerAngles = transform.localEulerAngles + Vector3.left * recoilAngle;
 
         if (!isReloading && projectilesRemainingInMag == 0)
@@ -52,8 +52,8 @@ public class GunItem : Item
         }
     }
 
-    void Shoot(Transform view)
-    {
+    void Shoot(Transform view) 
+    { 
         if (!isReloading && Time.time > nextShotTime && projectilesRemainingInMag > 0)
         {
             if (gunInfo.fireMode == FireMode.Burst)
@@ -87,7 +87,7 @@ public class GunItem : Item
                 }
             }
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
-            muzzleFlash.Activate();s
+            muzzleFlash.Activate();
             transform.localPosition -= Vector3.forward * Random.Range(kickMinMax.x, kickMinMax.y);
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);

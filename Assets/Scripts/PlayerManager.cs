@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     PhotonView PV;
+    Vector3 playerSpawn;
 
     private void Awake()
     {
@@ -17,11 +18,25 @@ public class PlayerManager : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            CreateController();
+            Vector3 spawnPlace = Vector3.up;
+            if (RoomManager.Instance.Team1 <= RoomManager.Instance.Team2)
+            {
+                spawnPlace =  MapManager.Instance.spawners[0].transform.position;
+                RoomManager.Instance.Team1++;
+                RoomManager.Instance.AddPlayerToTeam1();
+            }
+            else
+            {
+                spawnPlace = MapManager.Instance.spawners[1].transform.position;
+                RoomManager.Instance.Team2++;
+                RoomManager.Instance.AddPlayerToTeam2();
+            }
+
+            CreateController(spawnPlace);
         }
     }
-    void CreateController()
+    public void CreateController(Vector3 spawnePlace)
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), new Vector3(4,2,-3), Quaternion.identity);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnePlace, Quaternion.identity);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
     public Transform itemHolder;
-    public Gun startingItem;
     public Item[] items;
     Item equippedGun;
 
@@ -14,10 +13,10 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
-        EquipGun(startingItem);
+        EquipGun();
     }
 
-    public void EquipGun(Gun gunToEquip)
+    public void EquipGun()
     {
         equippedGun = items[0];
     }
