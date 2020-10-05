@@ -58,7 +58,6 @@
     <Compile Include="Assets\Scripts\MapManager.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
-    <Compile Include="Assets\Players\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RoomListItem.cs" />
     <Compile Include="Assets\Scripts\MenuPhoton.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
@@ -78,18 +77,15 @@
     <Compile Include="Assets\Scripts\PlayerListItem.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\RoomManager.cs" />
-    <Compile Include="Assets\Players\Scripts\PlayerLook.cs" />
     <Compile Include="Assets\Scripts\ItemController.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\Scripts\ItemInfo.cs" />
     <Compile Include="Assets\Scripts\Launcher.cs" />
-    <Compile Include="Assets\Players\Scripts\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\LivingEntity.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\GunInfo.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
-    <Compile Include="Assets\Players\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\PlayerGroundCheck.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
