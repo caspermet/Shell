@@ -56,12 +56,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        MenuManager.Instance.OpenMenu("Choose team");
+    }
+
+    public void JoineRoom()
+    {
         MenuManager.Instance.OpenMenu("room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
         Photon.Realtime.Player[] player = PhotonNetwork.PlayerList;
 
-        foreach(Transform child in playerListContent)
+        foreach (Transform child in playerListContent)
         {
             Destroy(child.gameObject);
         }
@@ -88,6 +93,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         PhotonNetwork.LoadLevel(1);
+        MenuManager.Instance.OpenMenu("Choose team");
     }
 
     public void LeaveRoom()
@@ -105,6 +111,29 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         MenuManager.Instance.OpenMenu("title");
+    }
+
+    public void ChooseTeam(int team)
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+        {
+            //we already have a team- so switch teams
+            PhotonNetwork.LocalPlayer.CustomProperties["Team"] = team;
+        }
+        else
+        {
+            //we dont have a team yet- create the custom property and set it
+            //0 for blue, 1 for red
+            //set the player properties of this client to the team they clicked
+            ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable
+        {
+            { "Team", team }
+        };
+            //set the property of Team to the value the user wants
+            PhotonNetwork.SetPlayerCustomProperties(playerProps);
+        }
+
+        JoineRoom();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

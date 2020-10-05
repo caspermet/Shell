@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
 {
     PhotonView PV;
     Vector3 playerSpawn;
+    public Transform ChooseTeam;
 
     private void Awake()
     {
@@ -19,9 +20,11 @@ public class PlayerManager : MonoBehaviour
         if (PV.IsMine)
         {
             Vector3 spawnPlace = Vector3.up;
-            if (RoomManager.Instance.Team1 <= RoomManager.Instance.Team2)
+            int team = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+
+            if (team == 0)
             {
-                spawnPlace =  MapManager.Instance.spawners[0].transform.position;
+                spawnPlace = MapManager.Instance.spawners[0].transform.position;
                 RoomManager.Instance.Team1++;
                 RoomManager.Instance.AddPlayerToTeam1();
             }
@@ -35,6 +38,7 @@ public class PlayerManager : MonoBehaviour
             CreateController(spawnPlace);
         }
     }
+
     public void CreateController(Vector3 spawnePlace)
     {
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnePlace, Quaternion.identity);
