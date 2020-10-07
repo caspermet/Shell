@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public abstract class Item : MonoBehaviourPunCallbacks
 {
     public ItemInfo itemInfo;
     public GameObject itemGameObject;

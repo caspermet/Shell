@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GunItem : Item
@@ -19,6 +21,9 @@ public class GunItem : Item
     public Transform impactEffect;
     MuzzleFlash muzzleFlash;
     float nextShotTime;
+
+    private Vector3 localPosition;
+    private Quaternion localRotation;
 
     bool triggerReleaseSinceLastShot;
     int shotRemainingInBurst;
@@ -41,6 +46,7 @@ public class GunItem : Item
 
     private void LateUpdate()
     {
+
         //anime recoil
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
         recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
@@ -50,12 +56,15 @@ public class GunItem : Item
         {
             Reload();
         }
+
     }
 
-    void Shoot(Transform view) 
-    { 
+    void Shoot(Transform view)
+    {
         if (!isReloading && Time.time > nextShotTime && projectilesRemainingInMag > 0)
         {
+
+
             if (gunInfo.fireMode == FireMode.Burst)
             {
                 if (shotRemainingInBurst == 0)
@@ -81,9 +90,10 @@ public class GunItem : Item
                 nextShotTime = Time.time + gunInfo.msBetweenShots / 1000;
 
                 RaycastHit hit;
-                if (Physics.Raycast(view.position, view.forward, out hit, gunInfo.range))
+                if (Physics.Raycast(view.position + view.forward * 0.1f, view.forward, out hit, gunInfo.range))
                 {
                     OnHitObject(hit.collider, hit.point, hit.normal);
+                    
                 }
             }
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
@@ -91,10 +101,9 @@ public class GunItem : Item
             transform.localPosition -= Vector3.forward * Random.Range(kickMinMax.x, kickMinMax.y);
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
-            if (AudioManager.instance != null)
-            {
-                AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
-            }
+            AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
+
+
         }
     }
 
@@ -152,10 +161,11 @@ public class GunItem : Item
         IDamageable damagableObject = c.GetComponent<IDamageable>();
         if (damagableObject != null)
         {
-            damagableObject.TakeHit(damage, hitPoint, transform.forward);
+            //damagableObject.TakeHit(damage, hitPoint, transform.forward);
+            c.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, 1f, PhotonNetwork.LocalPlayer.NickName);
         }
 
-        var effect = Instantiate(impactEffect, hitPoint, Quaternion.LookRotation(normal));
+        var effect = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impactFlesh"), hitPoint, Quaternion.LookRotation(normal));
         effect.transform.parent = c.transform;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ItemController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject cameraHolder;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
@@ -53,7 +53,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!PV.IsMine)
+        {
             return;
+        }
 
         LookSystem();
         MoveSystemm();

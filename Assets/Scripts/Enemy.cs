@@ -109,7 +109,7 @@ public class Enemy : LivingEntity
             if (percent >= 0.5f && !hasAppliedDamage)
             {
                 hasAppliedDamage = true;
-                targetEntity.TakeDamage(damage);
+                targetEntity.TakeDamage(damage, "a");
             }
             percent += Time.deltaTime * attackSpeed;
             float interpolation = (-percent * percent + percent) * 4;
