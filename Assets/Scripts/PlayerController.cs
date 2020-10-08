@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
     [SerializeField] Item[] items;
 
+    public bool isDebug = false;
+
     public AudioListener audioListener;
 
     int itemIndex;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    public Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,7 +43,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if (PV.IsMine)
+        if (PV.IsMine || isDebug)
         {
             EquipItem(0);
         }
@@ -52,7 +56,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!PV.IsMine)
+        if (!PV.IsMine && isDebug == false)
         {
             return;
         }
@@ -110,7 +114,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(transform.up * jumpForce);
+            //rb.AddForce(transform.up * jumpForce);
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
     }
 
@@ -124,6 +129,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (Input.GetMouseButtonUp(0))
         {
             itemController.OnTriggerRelease();
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            OnTriggetReleaseFire2();
+        }
+
+        if (Input.GetButtonUp("Fire2"))
+        {
+            OnTriggetHoldFire2();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -152,5 +167,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
             return;
 
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+    }
+
+    private void scope(bool isScoped)
+    {
+        animator.SetBool("IsScoped", isScoped);
+    }
+
+    public void OnTriggetReleaseFire2()
+    {
+        scope(true);
+    }
+
+    public void OnTriggetHoldFire2()
+    {
+        scope(false);
     }
 }
