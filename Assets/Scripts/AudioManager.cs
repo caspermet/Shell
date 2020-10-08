@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public float masterVolumePercent { get; private set; }
     public float sfxVolumePercent { get; private set; }
     public float musicVolumePercent { get; private set; }
+    public Transform Listener;
 
     AudioSource sfx2DSource;
     AudioSource[] musicSources;
@@ -118,6 +119,11 @@ public class AudioManager : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void SetListener(bool set)
+    {
+        Listener.gameObject.SetActive(set);
     }
 
     public void PlaySound2D(string soundName)

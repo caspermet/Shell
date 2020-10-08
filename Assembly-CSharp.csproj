@@ -65,29 +65,31 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Utility.cs" />
-    <Compile Include="Assets\Items\Scripts\GunItem.cs" />
+    <Compile Include="Assets\Items\Guns\Scripts\GunItem.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\MuzzleFlash.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Items\Scripts\IItem.cs" />
+    <Compile Include="Assets\Items\Guns\Scripts\IItem.cs" />
     <Compile Include="Assets\Scripts\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\PlayerListItem.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\RoomManager.cs" />
-    <Compile Include="Assets\Items\Scripts\ItemController.cs" />
+    <Compile Include="Assets\Items\Guns\Scripts\ItemController.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
-    <Compile Include="Assets\Items\Scripts\ItemInfo.cs" />
+    <Compile Include="Assets\Items\Guns\Scripts\ItemInfo.cs" />
     <Compile Include="Assets\Scripts\Launcher.cs" />
     <Compile Include="Assets\Scripts\LivingEntity.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
-    <Compile Include="Assets\Items\Scripts\GunInfo.cs" />
+    <Compile Include="Assets\Items\Guns\Scripts\GunInfo.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\PlayerGroundCheck.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ImpactManager.cs" />
+    <Compile Include="Assets\Scripts\ImpactLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

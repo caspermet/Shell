@@ -93,7 +93,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         PhotonNetwork.LoadLevel(1);
-        MenuManager.Instance.OpenMenu("Choose team");
+        AudioManager.instance.SetListener(false);
     }
 
     public void LeaveRoom()
@@ -105,7 +105,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info)
     {
         PhotonNetwork.JoinRoom(info.Name);
-        MenuManager.Instance.OpenMenu("Loading");      
+        MenuManager.Instance.OpenMenu("Loading");
     }
 
     public override void OnLeftRoom()
@@ -138,7 +138,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach(Transform trans in roomListContent)
+        foreach (Transform trans in roomListContent)
         {
             Destroy(trans);
         }

@@ -4,16 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ItemController))]
+[RequireComponent(typeof(LivingEntity))]
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject cameraHolder;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
-    [SerializeField] Item[] items;
-
-    public bool isDebug = false;
-
-    public AudioListener audioListener;
 
     int itemIndex;
     int previousItemIndex = -1;
@@ -24,21 +19,22 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     Rigidbody rb;
     PhotonView PV;
-    private bool isGrounded;
-
-    ItemController itemController;
+    bool isGrounded;
+    bool isMouseButton2 = false;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-
+    public ItemController itemController;
     public Animator animator;
+    public AudioListener audioListener;
+
+    public bool isDebug = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         PV = GetComponent<PhotonView>();
-        itemController = GetComponent<ItemController>();
     }
 
     void Start()
@@ -65,30 +61,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
         MoveSystemm();
         JumpSystem();
         WeaponSystem();
-
-
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
-        {
-            if (itemIndex >= items.Length - 1)
-            {
-                EquipItem(0);
-            }
-            else
-            {
-                EquipItem(itemIndex + 1);
-            }
-        }
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
-        {
-            if (itemIndex <= 0)
-            {
-                EquipItem(items.Length - 1);
-            }
-            else
-            {
-                EquipItem(itemIndex - 1);
-            }
-        }
     }
 
     void LookSystem()
@@ -104,8 +76,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void MoveSystemm()
     {
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        float moveSpeed = walkSpeed;
+        if (Input.GetKey(KeyCode.LeftShift) && (itemController.GetItemType() != ItemType.Gun || !isMouseButton2))
+        {
+            moveSpeed = sprintSpeed;
+        }
 
-        moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
+        moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * moveSpeed, ref smoothMoveVelocity, smoothTime);
     }
 
     void JumpSystem()
@@ -133,12 +110,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (Input.GetButtonDown("Fire2"))
         {
-            OnTriggetReleaseFire2();
+            isMouseButton2 = true;
+            itemController.OnTriggerHoldFire2();
         }
 
         if (Input.GetButtonUp("Fire2"))
         {
-            OnTriggetHoldFire2();
+            isMouseButton2 = false;
+            itemController.OnTriggerReleaseFire2();
+
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -167,20 +147,5 @@ public class PlayerController : MonoBehaviourPunCallbacks
             return;
 
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
-    }
-
-    private void scope(bool isScoped)
-    {
-        animator.SetBool("IsScoped", isScoped);
-    }
-
-    public void OnTriggetReleaseFire2()
-    {
-        scope(true);
-    }
-
-    public void OnTriggetHoldFire2()
-    {
-        scope(false);
     }
 }
