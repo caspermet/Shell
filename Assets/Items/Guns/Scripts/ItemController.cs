@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    public Item[] items;
+    public List<Item> items;
+    public Item defaultItem;
+    public PlayerController playerController;
     Item equippedGun;
 
     int itemIndex;
@@ -17,7 +19,20 @@ public class ItemController : MonoBehaviour
 
     public void EquipGun()
     {
-        equippedGun = items[0];
+        if(items.Count == 0)
+        {
+            var newItem = Instantiate(defaultItem);
+            newItem.gameObject.transform.parent = transform;
+            equippedGun = newItem;
+            items.Add(newItem);
+        }
+        else
+        {
+            equippedGun = items[0];
+        }
+
+        equippedGun.SetPlayer(playerController);
+
     }
 
     public void EquipItem(int _index)

@@ -20,7 +20,7 @@ public class ImpactManager : MonoBehaviour
         }
     }
 
-    public void CreateImpact(string soundName, Vector3 pos)
+    public void CreateImpact(string impactName, Vector3 pos)
     {
         
     }

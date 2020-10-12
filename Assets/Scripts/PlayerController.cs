@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     PhotonView PV;
     bool isGrounded;
     bool isMouseButton2 = false;
+    public float xRotation = 0f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -65,12 +66,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void LookSystem()
     {
-        transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);     
 
         verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
-        cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+        cameraHolder.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     void MoveSystemm()

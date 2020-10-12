@@ -12,6 +12,7 @@ public class GunItem : Item
 
     [Header("Recoil")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
+    public Vector2 kickXMinMax = new Vector2(-0.1f, 0.1f);
     public Vector2 recoilAngleMinMax = new Vector2(3, 5);
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
@@ -42,13 +43,14 @@ public class GunItem : Item
         shotRemainingInBurst = gunInfo.bursCount;
         projectilesRemainingInMag = gunInfo.projectilesPerMag;
         itemType = ItemType.Gun;
+        animator.SetFloat("ShootSpeed", gunInfo.msBetweenShots / 10f);
     }
 
     private void LateUpdate()
     {
 
         //anime recoil
-        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
+        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
         recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
         //transform.localEulerAngles = transform.localEulerAngles + Vector3.left * recoilAngle;
 
@@ -88,17 +90,22 @@ public class GunItem : Item
                 }
                 projectilesRemainingInMag--;
                 nextShotTime = Time.time + gunInfo.msBetweenShots / 1000;
-
+                print(view.forward);
                 RaycastHit hit;
-                if (Physics.Raycast(view.position + view.forward * 0.1f, view.forward, out hit, gunInfo.range))
+                var sideKick = (Random.Range(-kickXMinMax.x, kickXMinMax.x) * Vector3.one)  + Vector3.one +  view.forward;
+                print(sideKick);
+                if (Physics.Raycast(view.position + view.forward * 0.1f , view.forward, out hit, gunInfo.range))
                 {
                     OnHitObject(hit.collider, hit.point, hit.normal);
-                    
+
                 }
             }
             //Instantiate(shell, shellEjection.position, shellEjection.rotation);
-           // muzzleFlash.Activate();
-            transform.localPosition -= Vector3.left * Random.Range(kickMinMax.x, kickMinMax.y);
+            muzzleFlash.Activate();
+            var verticalLookRotation = Random.Range(kickMinMax.x, kickMinMax.y);
+            playerController.xRotation -= verticalLookRotation;
+
+            //transform.localPosition -= Vector3.left * Random.Range(kickMinMax.x, kickMinMax.y);
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
             AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
@@ -165,7 +172,9 @@ public class GunItem : Item
             c.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, 1f, PhotonNetwork.LocalPlayer.NickName);
         }
 
-        var effect = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impactFlesh"), hitPoint, Quaternion.LookRotation(normal));
+        animator.SetTrigger("Shoot2");
+
+        var effect = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impact/impactFlesh"), hitPoint, Quaternion.LookRotation(normal));
         effect.transform.parent = c.transform;
     }
 

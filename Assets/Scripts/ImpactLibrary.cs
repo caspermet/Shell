@@ -4,5 +4,12 @@ using UnityEngine;
 
 public class ImpactLibrary : MonoBehaviour
 {
-    public Transform[] soundGroups;
+    public ImpactGroup[] soundGroups;
+
+    [System.Serializable]
+    public class ImpactGroup
+    {
+        public string groupID;
+        public Transform[] group;
+    }
 }
