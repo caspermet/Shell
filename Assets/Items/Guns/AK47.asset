@@ -16,10 +16,10 @@ MonoBehaviour:
   itemType: 0
   fireMode: 0
   canPlayerChangeFireMode: 1
-  msBetweenShots: 100
+  msBetweenShots: 0.1
   muzzleVelocity: 35
   bursCount: 5
-  projectilesPerMag: 15
+  projectilesPerMag: 500
   reloadTime: 1.2
   range: 500
   damage: 1

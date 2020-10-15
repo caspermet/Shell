@@ -12,7 +12,7 @@ public class GunItem : Item
 
     [Header("Recoil")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
-    public Vector2 kickXMinMax = new Vector2(-0.1f, 0.1f);
+    public Vector2 kickXMinMax = new Vector2(20f, 0.1f);
     public Vector2 recoilAngleMinMax = new Vector2(3, 5);
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
@@ -90,11 +90,18 @@ public class GunItem : Item
                 }
                 projectilesRemainingInMag--;
                 nextShotTime = Time.time + gunInfo.msBetweenShots / 1000;
-                print(view.forward);
+
                 RaycastHit hit;
-                var sideKick = (Random.Range(-kickXMinMax.x, kickXMinMax.x) * Vector3.one)  + Vector3.one +  view.forward;
-                print(sideKick);
-                if (Physics.Raycast(view.position + view.forward * 0.1f , view.forward, out hit, gunInfo.range))
+
+                var x = Random.Range(-kickXMinMax.x, kickXMinMax.x);
+                var radius = Random.Range(Mathf.Abs(x), kickXMinMax.x);
+                var y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(x, 2));
+
+
+                var sideKick = Quaternion.AngleAxis(y, Vector3.right) * Quaternion.AngleAxis(x, Vector3.up) * view.forward;
+                var sideKickk = Quaternion.AngleAxis(y, Vector3.right) * view.forward;
+
+                if (Physics.Raycast(view.position + view.forward * 0.1f , sideKick, out hit, gunInfo.range))
                 {
                     OnHitObject(hit.collider, hit.point, hit.normal);
 
@@ -103,12 +110,12 @@ public class GunItem : Item
             //Instantiate(shell, shellEjection.position, shellEjection.rotation);
             muzzleFlash.Activate();
             var verticalLookRotation = Random.Range(kickMinMax.x, kickMinMax.y);
-            playerController.xRotation -= verticalLookRotation;
+            //playerController.xRotation -= verticalLookRotation;
 
             //transform.localPosition -= Vector3.left * Random.Range(kickMinMax.x, kickMinMax.y);
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
-            AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
+            // AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
 
 
         }

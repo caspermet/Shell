@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         LookSystem();
         MoveSystemm();
         JumpSystem();
-        WeaponSystem();
+        //WeaponSystem();
+        itemController.OnTriggerHold(cameraHolder.transform);
     }
 
     void LookSystem()
