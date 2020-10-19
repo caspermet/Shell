@@ -23,6 +23,6 @@ MonoBehaviour:
   reloadTime: 1.2
   range: 500
   damage: 1
-  aimingDeviation: 15
+  aimingDeviation: 3
   shootAudio: {fileID: 8300000, guid: 7a3a19c2fc27d5c48990fd60ca7cd2db, type: 3}
   reloadAudio: {fileID: 8300000, guid: 7a05fe39749a757438482af71e097d89, type: 3}

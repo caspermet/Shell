@@ -37,7 +37,12 @@ public class PauseMenu : MonoBehaviourPunCallbacks
 
     public void Option()
     {
+        MenuManager.Instance.OpenMenu("Option menu");
+    }
 
+    public void back()
+    {
+        MenuManager.Instance.OpenMenu("Pause");
     }
 
     public bool IsPause()

@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\ImpactManager.cs" />
     <Compile Include="Assets\Scripts\RoomListItem.cs" />
     <Compile Include="Assets\Menu\Scripts\MenuPhoton.cs" />
-    <Compile Include="Assets\Menu\Scripts\Menu.cs" />
+    <Compile Include="Assets\Menu\Scripts\AudioMenu.cs" />
     <Compile Include="Assets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\Audio\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
