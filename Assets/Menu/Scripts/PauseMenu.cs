@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviourPunCallbacks
 {
-    private bool isPause;
     public static PauseMenu Instance;
+    public GameObject background;
+
+    private bool isPause;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class PauseMenu : MonoBehaviourPunCallbacks
         }
         isPause = !isPause;
         Cursor.visible = isPause;
+        background.SetActive(isPause);
     }
 
     public void Option()
