@@ -17,6 +17,8 @@ public class GunInfo : ItemInfo
     public float reloadTime = 0.3f;
     public float range = 100;
     public float damage = 1;
+    [Range(0, 15)]
+    public float aimingDeviation = 1;
 
     [Header("Effects")]
     public AudioClip shootAudio;

@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!PV.IsMine && isDebug == false)
+        if ((!PV.IsMine && isDebug == false) || PauseMenu.Instance.IsPause())
         {
             return;
         }
@@ -61,8 +61,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         LookSystem();
         MoveSystemm();
         JumpSystem();
-        //WeaponSystem();
-        itemController.OnTriggerHold(cameraHolder.transform);
+        WeaponSystem();
     }
 
     void LookSystem()
@@ -72,9 +71,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);     
-
-        verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
         cameraHolder.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);

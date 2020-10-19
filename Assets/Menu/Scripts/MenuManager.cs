@@ -44,4 +44,15 @@ public class MenuManager : MonoBehaviour
     {
         menu.Close();
     }
+
+    public void CloseMenu(string menuName)
+    {
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (menus[i].menuName == menuName && menus[i].open)
+            {
+                CloseMenu(menus[i]);
+            }
+        }
+    }
 }

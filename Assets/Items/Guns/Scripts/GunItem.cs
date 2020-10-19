@@ -12,8 +12,6 @@ public class GunItem : Item
 
     [Header("Recoil")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
-    [Range(0, 15)]
-    public float aimingDeviation = 1;
     public Vector2 recoilAngleMinMax = new Vector2(3, 5);
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
@@ -93,13 +91,16 @@ public class GunItem : Item
                 nextShotTime = Time.time + gunInfo.msBetweenShots / 1000;
 
                 RaycastHit hit;
+                Vector3 sideKick = view.forward;
+                if (!isScoped)
+                {
+                    var x = Random.Range(-gunInfo.aimingDeviation, gunInfo.aimingDeviation);
+                    var radius = Random.Range(Mathf.Abs(x), gunInfo.aimingDeviation);
+                    var y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(x, 2));
+                    y = Random.Range(0, 2) == 0 ? y : -y;
 
-                var x = Random.Range(-aimingDeviation, aimingDeviation);
-                var radius = Random.Range(Mathf.Abs(x), aimingDeviation);
-                var y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(x, 2));
-                y = Random.Range(0, 2) == 0 ? y : -y;
-
-                var sideKick = Quaternion.AngleAxis(y, view.right) * Quaternion.AngleAxis(x, view.up) * view.forward;
+                    sideKick = Quaternion.AngleAxis(y, view.right) * Quaternion.AngleAxis(x, view.up) * view.forward;
+                }
 
                 if (Physics.Raycast(view.position + view.forward * 0.1f , sideKick, out hit, gunInfo.range))
                 {

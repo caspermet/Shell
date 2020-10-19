@@ -92,6 +92,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        Cursor.visible = false;
         PhotonNetwork.LoadLevel(1);
         AudioManager.instance.SetListener(false);
     }
@@ -157,6 +158,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 

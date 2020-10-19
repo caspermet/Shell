@@ -138,7 +138,7 @@ MonoBehaviour:
   - {fileID: 2415886690058246314}
   animator: {fileID: -726354015232902364}
   kickMinMax: {x: 0.5, y: 0.7}
-  kickXMinMax: {x: 20, y: 0.1}
+  aimingDeviation: 5.6
   recoilAngleMinMax: {x: 3, y: 5}
   recoilMoveSettleTime: 0.1
   recoilRotationSettleTime: 0.1
