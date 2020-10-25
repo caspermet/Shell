@@ -29,31 +29,30 @@ public class GunItem : Item
     bool triggerReleaseSinceLastShot;
     int shotRemainingInBurst;
     int projectilesRemainingInMag;
+    int totalprojectiles;
     bool isReloading;
 
     Vector3 recoilSmoothDampVelocity;
     float recoilRotSmoothDampVelocity;
     float recoilAngle;
     bool isScoped = false;
+    int numberOfAmmo;
 
     private void Start()
     {
         muzzleFlash = GetComponent<MuzzleFlash>();
         shotRemainingInBurst = gunInfo.bursCount;
         projectilesRemainingInMag = gunInfo.projectilesPerMag;
+        totalprojectiles = gunInfo.totalProjectiles;
         itemType = ItemType.Gun;
         animator.SetFloat("ShootSpeed", gunInfo.msBetweenShots / 10f);
+
+        GunAmmoUI.instance.UpdateAmmoUI(projectilesRemainingInMag, totalprojectiles);
     }
 
     private void LateUpdate()
     {
-
-        //anime recoil
-        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
-        recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotationSettleTime);
-        //transform.localEulerAngles = transform.localEulerAngles + Vector3.left * recoilAngle;
-
-        if (!isReloading && projectilesRemainingInMag == 0)
+        if (!isReloading && projectilesRemainingInMag == 0 && totalprojectiles != 0)
         {
             Reload();
         }
@@ -113,9 +112,7 @@ public class GunItem : Item
             var verticalLookRotation = Random.Range(kickMinMax.x, kickMinMax.y);
             playerController.xRotation -= verticalLookRotation;
 
-            //transform.localPosition -= Vector3.left * Random.Range(kickMinMax.x, kickMinMax.y);
-            recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
-            recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
+            GunAmmoUI.instance.UpdateAmmoUI(projectilesRemainingInMag, totalprojectiles);
             AudioManager.instance.PlaySound(gunInfo.shootAudio, projectileSpawn[0].position);
 
 
@@ -124,7 +121,7 @@ public class GunItem : Item
 
     public void Reload()
     {
-        if (!isReloading && projectilesRemainingInMag != gunInfo.projectilesPerMag)
+        if (!isReloading && projectilesRemainingInMag != gunInfo.projectilesPerMag && totalprojectiles > 0)
         {
             StartCoroutine(AnimateReload());
 
@@ -142,21 +139,26 @@ public class GunItem : Item
 
         float reloadSpeed = 1 / gunInfo.reloadTime;
         float percent = 0;
-        Vector3 initialRot = transform.localEulerAngles;
-        float maxReloadAngle = 30;
 
         while (percent < 1)
         {
             percent += Time.deltaTime * reloadSpeed;
-            float interpolation = (-percent * percent + percent) * 4;
-            float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
-            transform.localEulerAngles = initialRot + Vector3.left * reloadAngle;
-
             yield return null;
         }
 
         isReloading = false;
-        projectilesRemainingInMag = gunInfo.projectilesPerMag;
+
+        if (totalprojectiles >= gunInfo.projectilesPerMag )
+        {
+            projectilesRemainingInMag = gunInfo.projectilesPerMag;
+        }
+        else
+        {
+            projectilesRemainingInMag = totalprojectiles;
+        }
+
+        totalprojectiles -= projectilesRemainingInMag;
+        GunAmmoUI.instance.UpdateAmmoUI(projectilesRemainingInMag, totalprojectiles);
     }
 
     public override void OnTriggerHold(Transform view)

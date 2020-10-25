@@ -14,6 +14,7 @@ public class GunInfo : ItemInfo
     public float muzzleVelocity = 35;
     public int bursCount;
     public int projectilesPerMag;
+    public int totalProjectiles;
     public float reloadTime = 0.3f;
     public float range = 100;
     public float damage = 1;

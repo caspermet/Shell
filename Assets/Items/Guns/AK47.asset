@@ -19,7 +19,8 @@ MonoBehaviour:
   msBetweenShots: 100
   muzzleVelocity: 35
   bursCount: 5
-  projectilesPerMag: 500
+  projectilesPerMag: 30
+  totalProjectiles: 120
   reloadTime: 1.2
   range: 500
   damage: 1
