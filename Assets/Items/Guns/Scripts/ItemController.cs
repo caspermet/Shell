@@ -81,6 +81,14 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    public void Run(bool isRunning)
+    {
+        if (equippedGun != null)
+        {
+            equippedGun.Run(isRunning);
+        }
+    }
+
     public void Reload()
     {
         if(equippedGun != null && equippedGun is GunItem)

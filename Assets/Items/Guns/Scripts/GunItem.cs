@@ -203,4 +203,9 @@ public class GunItem : Item
     {
         scope(true);
     }
+
+    internal override void Run(bool isRunning)
+    {
+        animator.SetBool("Run", isRunning);
+    }
 }

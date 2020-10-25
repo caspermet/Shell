@@ -11,9 +11,12 @@ public class AudioMenu : MonoBehaviour
 
     private void Start()
     {
-        volumeSLiders[0].value = AudioManager.instance.masterVolumePercent;
-        volumeSLiders[1].value = AudioManager.instance.musicVolumePercent;
-        volumeSLiders[2].value = AudioManager.instance.sfxVolumePercent;
+        if (AudioManager.instance != null)
+        {
+            volumeSLiders[0].value = AudioManager.instance.masterVolumePercent;
+            volumeSLiders[1].value = AudioManager.instance.musicVolumePercent;
+            volumeSLiders[2].value = AudioManager.instance.sfxVolumePercent;
+        }
     }
 
     public void SetMasterVolume(float value)

@@ -83,6 +83,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (Input.GetKey(KeyCode.LeftShift) && (itemController.GetItemType() != ItemType.Gun || !isMouseButton2))
         {
             moveSpeed = sprintSpeed;
+            itemController.Run(true);
+        }
+        else
+        {
+            itemController.Run(false);
         }
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * moveSpeed, ref smoothMoveVelocity, smoothTime);
@@ -146,7 +151,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void FixedUpdate()
     {
-        if (!PV.IsMine)
+        if (!PV.IsMine && isDebug == false)
             return;
 
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
